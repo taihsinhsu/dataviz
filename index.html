@@ -126,7 +126,7 @@
             .attr("d", line);
 
         g.append("text")
-          .attr("transform", "translate(" + (width+3) + "," + y(data[0].close) + ")")
+          .attr("transform", "translate(" + (width+3) + "," + y(data[data.length-1].close) + ")")
           .attr("dy", ".35em")
           .attr("text-anchor", "start")
           .style("fill", "steelblue")
