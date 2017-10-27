@@ -179,6 +179,13 @@
             .attr("stroke-linecap", "round")
             .attr("stroke-width", 1.5)
             .attr("d", lineObama);
+            .on("mouseover", function(d) {
+                d3.select(this).attr("stroke", "#dddddd")
+            })
+            .on("mouseout", function(){
+                d3.select(this).attr("stroke", "#86a67b")
+            });
+
         g.append("path")
             .datum(data)
             .attr("fill", "none")
