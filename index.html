@@ -60,7 +60,9 @@
       <div id="project">
         <div class="text">
           <h2> GUIDED PROJECT </h2>
-          <h3> US President Social Impact Before and After Their Presidency </h3>
+          <h3> US President Social Impact </h3>
+          <p> fjfiejfiejf
+          </p>
         </div>
       </div>
       <div style="text-align:center;">
@@ -115,15 +117,6 @@
       var lineReagan = d3.line()
           .x(function(d) { return x(d.date); })
           .y(function(d) { return y(d.reagan); });
-      /*var lineCarter = d3.line()
-          .x(function(d) { return x(d.date); })
-          .y(function(d) { return y(d.carter); });
-      var lineKennedy = d3.line()
-          .x(function(d) { return x(d.date); })
-          .y(function(d) { return y(d.kennedy); });
-      var lineJohnson = d3.line()
-          .x(function(d) { return x(d.date); })
-          .y(function(d) { return y(d.johnson); });*/
 
 
       d3.tsv("data.tsv", function(d) {
@@ -137,18 +130,15 @@
         d.wbush = +d.wbush;
         d.ford = +d.ford;
         d.kennedy = +d.kennedy;
-        d.reagan = +d.reagan; 
-        /*d.carter = +d.carter; 
-        d.kennedy = +d.kennedy;
-        d.johnson = +d.johnson;*/         
+        d.reagan = +d.reagan;        
         return d;
         }, function(error, data) {
         if (error) throw error;
 
         x.domain(d3.extent(data, function(d) { return d.date; }));
         y.domain([
-          d3.min(data, function(d) { return Math.min(d.obama, d.clinton, d.trump, d.eisenhower, d.roosevelt, d.bush, d.wbush, d.ford, d.kennedy, d.reagan/*, d.carter, d.kennedy, d.johnson*/); }),
-          d3.max(data, function(d) { return Math.max(d.obama, d.clinton, d.trump, d.eisenhower, d.roosevelt, d.bush, d.wbush, d.ford, d.kennedy, d.reagan/*, d.carter, d.kennedy, d.johnson*/); })
+          d3.min(data, function(d) { return Math.min(d.obama, d.clinton, d.trump, d.eisenhower, d.roosevelt, d.bush, d.wbush, d.ford, d.kennedy, d.reagan); }),
+          d3.max(data, function(d) { return Math.max(d.obama, d.clinton, d.trump, d.eisenhower, d.roosevelt, d.bush, d.wbush, d.ford, d.kennedy, d.reagan); })
         ]);
 
 
@@ -251,36 +241,12 @@
             .attr("stroke-linecap", "round")
             .attr("stroke-width", 1.5)
             .attr("d", lineReagan);
-        /*g.append("path")
-            .datum(data)
-            .attr("fill", "none")
-            .attr("stroke", "#283124")
-            .attr("stroke-linejoin", "round")
-            .attr("stroke-linecap", "round")
-            .attr("stroke-width", 1.5)
-            .attr("d", lineCarter);
-        g.append("path")
-            .datum(data)
-            .attr("fill", "none")
-            .attr("stroke", "#423c08")
-            .attr("stroke-linejoin", "round")
-            .attr("stroke-linecap", "round")
-            .attr("stroke-width", 1.5)
-            .attr("d", lineKennedy);
-        g.append("path")
-            .datum(data)
-            .attr("fill", "none")
-            .attr("stroke", "#44320c")
-            .attr("stroke-linejoin", "round")
-            .attr("stroke-linecap", "round")
-            .attr("stroke-width", 1.5)
-            .attr("d", lineJohnson);*/
 
 
         // add labels
         g.append("text")
           .attr("transform", "translate(" + (width) + "," + y(data[0].obama) + ")")
-          .attr("x", 3)
+          .attr("x", 6)
           .attr("dy", ".15em")
           .attr("text-anchor", "start")
           .style("fill", "#86a67b")
@@ -339,24 +305,7 @@
           .attr("text-anchor", "start")
           .style("fill", "#724874")
           .text("Reagan");
-        /*g.append("text")
-          .attr("transform", "translate(" + (width) + "," + y(data[0].carter) + ")")
-          .attr("dy", ".15em")
-          .attr("text-anchor", "start")
-          .style("fill", "#283124")
-          .text("Carter");
-        g.append("text")
-          .attr("transform", "translate(" + (width) + "," + y(data[0].kennedy) + ")")
-          .attr("dy", ".15em")
-          .attr("text-anchor", "start")
-          .style("fill", "#423c08")
-          .text("Kennedy");
-        g.append("text")
-          .attr("transform", "translate(" + (width) + "," + y(data[0].johnson) + ")")
-          .attr("dy", ".15em")
-          .attr("text-anchor", "start")
-          .style("fill", "#44320c")
-          .text("Johnson");*/
+
       });
     </script>
   </body>
