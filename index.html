@@ -87,19 +87,20 @@
       // create lines
       var line = d3.line()
           .x(function(d) { return x(d.date); })
-          .y(function(d) { return y(d.close); });
+          .y(function(d) { return y(d.Obama); });
 
 
 
       d3.tsv("data.tsv", function(d) {
         d.date = parseTime(d.date);
-        d.close = +d.close;
+        d.Obama = +d.Obama;
         return d;
       }, function(error, data) {
         if (error) throw error;
 
         x.domain(d3.extent(data, function(d) { return d.date; }));
-        y.domain(d3.extent(data, function(d) { return d.close; }));
+        y.domain(d3.extent(data, function(d) { return d.Obama; }));
+
 
         g.append("g")
             .attr("transform", "translate(0," + height + ")")
@@ -126,8 +127,9 @@
             .attr("stroke-width", 1.5)
             .attr("d", line);
 
+        // add labels
         g.append("text")
-          .attr("transform", "translate(" + (width-40) + "," + y(data[0].close) + ")")
+          .attr("transform", "translate(" + (width-40) + "," + y(data[0].Obama) + ")")
           .attr("dy", ".35em")
           .attr("text-anchor", "start")
           .style("fill", "steelblue")
