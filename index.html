@@ -109,12 +109,12 @@
       var lineFord = d3.line()
           .x(function(d) { return x(d.date); })
           .y(function(d) { return y(d.ford); });
-      var lineTruman = d3.line()
+      var lineKennedy = d3.line()
           .x(function(d) { return x(d.date); })
-          .y(function(d) { return y(d.truman); });
-      var lineHoover = d3.line()
+          .y(function(d) { return y(d.kennedy); });
+      var lineReagan = d3.line()
           .x(function(d) { return x(d.date); })
-          .y(function(d) { return y(d.hoover); });
+          .y(function(d) { return y(d.reagan); });
       /*var lineCarter = d3.line()
           .x(function(d) { return x(d.date); })
           .y(function(d) { return y(d.carter); });
@@ -136,8 +136,8 @@
         d.bush = +d.bush;
         d.wbush = +d.wbush;
         d.ford = +d.ford;
-        d.truman = +d.truman;
-        d.hoover = +d.hoover; 
+        d.kennedy = +d.kennedy;
+        d.reagan = +d.reagan; 
         /*d.carter = +d.carter; 
         d.kennedy = +d.kennedy;
         d.johnson = +d.johnson;*/         
@@ -147,8 +147,8 @@
 
         x.domain(d3.extent(data, function(d) { return d.date; }));
         y.domain([
-          d3.min(data, function(d) { return Math.min(d.obama, d.clinton, d.trump, d.eisenhower, d.roosevelt, d.bush, d.wbush, d.ford, d.truman, d.hoover/*, d.carter, d.kennedy, d.johnson*/); }),
-          d3.max(data, function(d) { return Math.max(d.obama, d.clinton, d.trump, d.eisenhower, d.roosevelt, d.bush, d.wbush, d.ford, d.truman, d.hoover/*, d.carter, d.kennedy, d.johnson*/); })
+          d3.min(data, function(d) { return Math.min(d.obama, d.clinton, d.trump, d.eisenhower, d.roosevelt, d.bush, d.wbush, d.ford, d.kennedy, d.reagan/*, d.carter, d.kennedy, d.johnson*/); }),
+          d3.max(data, function(d) { return Math.max(d.obama, d.clinton, d.trump, d.eisenhower, d.roosevelt, d.bush, d.wbush, d.ford, d.kennedy, d.reagan/*, d.carter, d.kennedy, d.johnson*/); })
         ]);
 
 
@@ -242,7 +242,7 @@
             .attr("stroke-linejoin", "round")
             .attr("stroke-linecap", "round")
             .attr("stroke-width", 1.5)
-            .attr("d", lineTruman);
+            .attr("d", lineKennedy);
         g.append("path")
             .datum(data)
             .attr("fill", "none")
@@ -328,17 +328,17 @@
           .style("fill", "#9f761c")
           .text("Ford");
         g.append("text")
-          .attr("transform", "translate(" + (width) + "," + y(data[0].truman) + ")")
+          .attr("transform", "translate(" + (width) + "," + y(data[0].kennedy) + ")")
           .attr("dy", ".15em")
           .attr("text-anchor", "start")
           .style("fill", "#a15639")
-          .text("Truman");
+          .text("Kennedy");
         g.append("text")
-          .attr("transform", "translate(" + (width) + "," + y(data[0].hoover) + ")")
+          .attr("transform", "translate(" + (width) + "," + y(data[0].reagan) + ")")
           .attr("dy", ".15em")
           .attr("text-anchor", "start")
           .style("fill", "#724874")
-          .text("Hoover");
+          .text("Reagan");
         /*g.append("text")
           .attr("transform", "translate(" + (width) + "," + y(data[0].carter) + ")")
           .attr("dy", ".15em")
