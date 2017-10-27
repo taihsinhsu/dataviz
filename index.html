@@ -263,12 +263,6 @@
             .attr("stroke-linecap", "round")
             .attr("stroke-width", 1.5)
             .attr("d", lineKennedy);
-            .on("mouseover", function(d) {
-                d3.select(this).style("stroke-width", 3.0).style("stroke", "#dddddd")
-            })
-            .on("mouseout", function(){
-                d3.select(this).style("stroke-width", 1.5).style("stroke", "#423c08")
-            });
 
 
         // add labels
