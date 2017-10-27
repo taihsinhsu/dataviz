@@ -99,11 +99,14 @@
         d.obama = +d.obama;
         d.clinton = +d.clinton;
         return d;
-      }, function(error, data) {
+        }, function(error, data) {
         if (error) throw error;
 
         x.domain(d3.extent(data, function(d) { return d.date; }));
-        y.domain(0, d3.max(data, function(d) { return Math.max(d.obama, d.clinton); }));
+        y.domain([
+          d3.min(data, function(d) { return Math.min(d.obama, d.clinton); }),
+          d3.max(data, function(d) { return Math.max(d.obama, d.clinton); })
+        ]);
 
 
 
