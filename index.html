@@ -106,7 +106,12 @@
       var lineWBush = d3.line()
           .x(function(d) { return x(d.date); })
           .y(function(d) { return y(d.wbush); });
-
+      var lineFord = d3.line()
+          .x(function(d) { return x(d.date); })
+          .y(function(d) { return y(d.ford); });
+      var lineTruman = d3.line()
+          .x(function(d) { return x(d.date); })
+          .y(function(d) { return y(d.truman); });
 
 
       d3.tsv("data.tsv", function(d) {
@@ -117,15 +122,17 @@
         d.eisenhower = +d.eisenhower;
         d.roosevelt = +d.roosevelt;
         d.bush = +d.bush;
-        d.wbush = +d.wbush;          
+        d.wbush = +d.wbush;
+        d.ford = +d.ford;
+        d.truman = +d.truman;           
         return d;
         }, function(error, data) {
         if (error) throw error;
 
         x.domain(d3.extent(data, function(d) { return d.date; }));
         y.domain([
-          d3.min(data, function(d) { return Math.min(d.obama, d.clinton, d.trump, d.eisenhower, d.roosevelt, d.bush, d.wbush); }),
-          d3.max(data, function(d) { return Math.max(d.obama, d.clinton, d.trump, d.eisenhower, d.roosevelt, d.bush, d.wbush); })
+          d3.min(data, function(d) { return Math.min(d.obama, d.clinton, d.trump, d.eisenhower, d.roosevelt, d.bush, d.wbush, d.ford, d.truman); }),
+          d3.max(data, function(d) { return Math.max(d.obama, d.clinton, d.trump, d.eisenhower, d.roosevelt, d.bush, d.wbush, d.ford, d.truman); })
         ]);
 
 
@@ -204,6 +211,22 @@
             .attr("stroke-linecap", "round")
             .attr("stroke-width", 1.5)
             .attr("d", lineWBush);
+        g.append("path")
+            .datum(data)
+            .attr("fill", "none")
+            .attr("stroke", "#9f761c")
+            .attr("stroke-linejoin", "round")
+            .attr("stroke-linecap", "round")
+            .attr("stroke-width", 1.5)
+            .attr("d", lineFord);
+        g.append("path")
+            .datum(data)
+            .attr("fill", "none")
+            .attr("stroke", "#a15639")
+            .attr("stroke-linejoin", "round")
+            .attr("stroke-linecap", "round")
+            .attr("stroke-width", 1.5)
+            .attr("d", lineTruma);
 
 
         // add labels
@@ -211,7 +234,7 @@
           .attr("transform", "translate(" + (width) + "," + y(data[0].obama) + ")")
           .attr("dy", ".15em")
           .attr("text-anchor", "start")
-          .style("fill", "steelblue")
+          .style("fill", "#86a67b")
           .text("Obama");
         g.append("text")
           .attr("transform", "translate(" + (width) + "," + y(data[0].clinton) + ")")
@@ -232,23 +255,35 @@
           .style("fill", "#e67c52")
           .text("Eisenhower");
         g.append("text")
-          .attr("transform", "translate(" + (width) + "," + y(data[0].eisenhower) + ")")
+          .attr("transform", "translate(" + (width) + "," + y(data[0].roosevelt) + ")")
           .attr("dy", ".15em")
           .attr("text-anchor", "start")
           .style("fill", "#a468a6")
           .text("Roosevelt");
         g.append("text")
-          .attr("transform", "translate(" + (width) + "," + y(data[0].eisenhower) + ")")
+          .attr("transform", "translate(" + (width) + "," + y(data[0].bush) + ")")
           .attr("dy", ".15em")
           .attr("text-anchor", "start")
           .style("fill", "#5d7456")
           .text("Bush");
         g.append("text")
-          .attr("transform", "translate(" + (width) + "," + y(data[0].eisenhower) + ")")
+          .attr("transform", "translate(" + (width) + "," + y(data[0].wbush) + ")")
           .attr("dy", ".15em")
           .attr("text-anchor", "start")
           .style("fill", "#9b8c13")
           .text("WBush");
+        g.append("text")
+          .attr("transform", "translate(" + (width) + "," + y(data[0].ford) + ")")
+          .attr("dy", ".15em")
+          .attr("text-anchor", "start")
+          .style("fill", "#9f761c")
+          .text("Ford");
+        g.append("text")
+          .attr("transform", "translate(" + (width) + "," + y(data[0].truman) + ")")
+          .attr("dy", ".15em")
+          .attr("text-anchor", "start")
+          .style("fill", "#a15639")
+          .text("Truma");
       });
     </script>
   </body>
