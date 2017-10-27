@@ -91,7 +91,7 @@
       var lineClinton = d3.line()
           .x(function(d) { return x(d.date); })
           .y(function(d) { return y(d.clinton); });
-      var lineTrump = d3.line()
+      /*var lineTrump = d3.line()
           .x(function(d) { return x(d.date); })
           .y(function(d) { return y(d.trump); });
       var lineEisenhower = d3.line()
@@ -123,14 +123,14 @@
           .y(function(d) { return y(d.kennedy); });
       var lineJohnson = d3.line()
           .x(function(d) { return x(d.date); })
-          .y(function(d) { return y(d.johnson); });
+          .y(function(d) { return y(d.johnson); });*/
 
 
       d3.tsv("data.tsv", function(d) {
         d.date = parseTime(d.date);
         d.obama = +d.obama;
         d.clinton = +d.clinton;
-        d.trump = +d.trump;
+        /*d.trump = +d.trump;
         d.eisenhower = +d.eisenhower;
         d.roosevelt = +d.roosevelt;
         d.bush = +d.bush;
@@ -140,15 +140,15 @@
         d.hoover = +d.hoover; 
         d.carter = +d.carter; 
         d.kennedy = +d.kennedy;
-        d.johnson = +d.johnson;         
+        d.johnson = +d.johnson;*/         
         return d;
         }, function(error, data) {
         if (error) throw error;
 
         x.domain(d3.extent(data, function(d) { return d.date; }));
         y.domain([
-          d3.min(data, function(d) { return Math.min(d.obama, d.clinton, d.trump, d.eisenhower, d.roosevelt, d.bush, d.wbush, d.ford, d.truman, d.hoover, d.carter, d.kennedy, d.johnson); }),
-          d3.max(data, function(d) { return Math.max(d.obama, d.clinton, d.trump, d.eisenhower, d.roosevelt, d.bush, d.wbush, d.ford, d.truman, d.hoover, d.carter, d.kennedy, d.johnson); })
+          d3.min(data, function(d) { return Math.min(d.obama, d.clinton/*, d.trump, d.eisenhower, d.roosevelt, d.bush, d.wbush, d.ford, d.truman, d.hoover, d.carter, d.kennedy, d.johnson*/); }),
+          d3.max(data, function(d) { return Math.max(d.obama, d.clinton/*, d.trump, d.eisenhower, d.roosevelt, d.bush, d.wbush, d.ford, d.truman, d.hoover, d.carter, d.kennedy, d.johnson*/); })
         ]);
 
 
@@ -187,7 +187,7 @@
             .attr("stroke-linecap", "round")
             .attr("stroke-width", 1.5)
             .attr("d", lineClinton);
-        g.append("path")
+        /*g.append("path")
             .datum(data)
             .attr("fill", "none")
             .attr("stroke", "#e4a928")
@@ -274,7 +274,7 @@
             .attr("stroke-linejoin", "round")
             .attr("stroke-linecap", "round")
             .attr("stroke-width", 1.5)
-            .attr("d", lineJohnson);
+            .attr("d", lineJohnson);*/
 
 
         // add labels
@@ -290,7 +290,7 @@
           .attr("text-anchor", "start")
           .style("fill", "#dec81c")
           .text("Clinton");
-        g.append("text")
+        /*g.append("text")
           .attr("transform", "translate(" + (width) + "," + y(data[0].trump) + ")")
           .attr("dy", ".15em")
           .attr("text-anchor", "start")
@@ -355,7 +355,7 @@
           .attr("dy", ".15em")
           .attr("text-anchor", "start")
           .style("fill", "#44320c")
-          .text("Johnson");
+          .text("Johnson");*/
       });
     </script>
   </body>
