@@ -246,9 +246,10 @@
         // add labels
         g.append("text")
           .attr("transform", "translate(" + (width) + "," + y(data[0].obama) + ")")
-          .attr("dy", ".05em")
+          .attr("dy", ".15em")
           .attr("text-anchor", "start")
-          .style("fill", "#86a67b")
+          .style("fill", "#000")
+          .style("font", "10px sans-serif")
           .text("Obama");
         g.append("text")
           .attr("transform", "translate(" + (width) + "," + y(data[0].clinton) + ")")
