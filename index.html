@@ -118,6 +118,9 @@
       var lineCarter = d3.line()
           .x(function(d) { return x(d.date); })
           .y(function(d) { return y(d.carter); });
+      var lineKennedy = d3.line()
+          .x(function(d) { return x(d.date); })
+          .y(function(d) { return y(d.kennedy); });
 
 
       d3.tsv("data.tsv", function(d) {
@@ -132,15 +135,16 @@
         d.ford = +d.ford;
         d.truman = +d.truman;
         d.hoover = +d.hoover; 
-        d.carter = +d.carter;        
+        d.carter = +d.carter; 
+        d.kennedy = +d.kennedy;       
         return d;
         }, function(error, data) {
         if (error) throw error;
 
         x.domain(d3.extent(data, function(d) { return d.date; }));
         y.domain([
-          d3.min(data, function(d) { return Math.min(d.obama, d.clinton, d.trump, d.eisenhower, d.roosevelt, d.bush, d.wbush, d.ford, d.truman, d.hoover, d.carter); }),
-          d3.max(data, function(d) { return Math.max(d.obama, d.clinton, d.trump, d.eisenhower, d.roosevelt, d.bush, d.wbush, d.ford, d.truman, d.hoover, d.carter); })
+          d3.min(data, function(d) { return Math.min(d.obama, d.clinton, d.trump, d.eisenhower, d.roosevelt, d.bush, d.wbush, d.ford, d.truman, d.hoover, d.carter, d.kennedy); }),
+          d3.max(data, function(d) { return Math.max(d.obama, d.clinton, d.trump, d.eisenhower, d.roosevelt, d.bush, d.wbush, d.ford, d.truman, d.hoover, d.carter, d.kennedy); })
         ]);
 
 
@@ -251,6 +255,14 @@
             .attr("stroke-linecap", "round")
             .attr("stroke-width", 1.5)
             .attr("d", lineCarter);
+        g.append("path")
+            .datum(data)
+            .attr("fill", "none")
+            .attr("stroke", "#423c08")
+            .attr("stroke-linejoin", "round")
+            .attr("stroke-linecap", "round")
+            .attr("stroke-width", 1.5)
+            .attr("d", lineKennedy);
 
 
         // add labels
@@ -320,6 +332,12 @@
           .attr("text-anchor", "start")
           .style("fill", "#283124")
           .text("Carter");
+        g.append("text")
+          .attr("transform", "translate(" + (width) + "," + y(data[0].truman) + ")")
+          .attr("dy", ".15em")
+          .attr("text-anchor", "start")
+          .style("fill", "#423c08")
+          .text("Kennedy");
       });
     </script>
   </body>
