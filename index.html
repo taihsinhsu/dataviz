@@ -103,6 +103,9 @@
       var lineBush = d3.line()
           .x(function(d) { return x(d.date); })
           .y(function(d) { return y(d.bush); });
+      var lineWBush = d3.line()
+          .x(function(d) { return x(d.date); })
+          .y(function(d) { return y(d.wbush); });
 
 
 
@@ -113,15 +116,16 @@
         d.trump = +d.trump;
         d.eisenhower = +d.eisenhower;
         d.roosevelt = +d.roosevelt;
-        d.bush = +d.bush;        
+        d.bush = +d.bush;
+        d.wbush = +d.wbush;          
         return d;
         }, function(error, data) {
         if (error) throw error;
 
         x.domain(d3.extent(data, function(d) { return d.date; }));
         y.domain([
-          d3.min(data, function(d) { return Math.min(d.obama, d.clinton, d.trump, d.eisenhower, d.roosevelt, d.bush); }),
-          d3.max(data, function(d) { return Math.max(d.obama, d.clinton, d.trump, d.eisenhower, d.roosevelt, d.bush); })
+          d3.min(data, function(d) { return Math.min(d.obama, d.clinton, d.trump, d.eisenhower, d.roosevelt, d.bush, d.wbush); }),
+          d3.max(data, function(d) { return Math.max(d.obama, d.clinton, d.trump, d.eisenhower, d.roosevelt, d.bush, d.wbush); })
         ]);
 
 
@@ -192,7 +196,14 @@
             .attr("stroke-linecap", "round")
             .attr("stroke-width", 1.5)
             .attr("d", lineBush);
-
+        g.append("path")
+            .datum(data)
+            .attr("fill", "none")
+            .attr("stroke", "#9b8c13")
+            .attr("stroke-linejoin", "round")
+            .attr("stroke-linecap", "round")
+            .attr("stroke-width", 1.5)
+            .attr("d", lineWBush);
 
 
         // add labels
@@ -232,6 +243,12 @@
           .attr("text-anchor", "start")
           .style("fill", "#5d7456")
           .text("Bush");
+        g.append("text")
+          .attr("transform", "translate(" + (width) + "," + y(data[0].eisenhower) + ")")
+          .attr("dy", ".15em")
+          .attr("text-anchor", "start")
+          .style("fill", "#9b8c13")
+          .text("WBush");
       });
     </script>
   </body>
