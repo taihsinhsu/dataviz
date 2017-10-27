@@ -94,6 +94,9 @@
       var lineTrump = d3.line()
           .x(function(d) { return x(d.date); })
           .y(function(d) { return y(d.trump); });
+      var lineEisenhower = d3.line()
+          .x(function(d) { return x(d.date); })
+          .y(function(d) { return y(d.eisenhower); });
 
 
 
@@ -102,14 +105,15 @@
         d.obama = +d.obama;
         d.clinton = +d.clinton;
         d.trump = +d.trump;
+        d.eisenhower = +d.eisenhower;
         return d;
         }, function(error, data) {
         if (error) throw error;
 
         x.domain(d3.extent(data, function(d) { return d.date; }));
         y.domain([
-          d3.min(data, function(d) { return Math.min(d.obama, d.clinton, d.trump); }),
-          d3.max(data, function(d) { return Math.max(d.obama, d.clinton, d.trump); })
+          d3.min(data, function(d) { return Math.min(d.obama, d.clinton, d.trump, d.eisenhower); }),
+          d3.max(data, function(d) { return Math.max(d.obama, d.clinton, d.trump, d.eisenhower); })
         ]);
 
 
@@ -156,6 +160,14 @@
             .attr("stroke-linecap", "round")
             .attr("stroke-width", 1.5)
             .attr("d", lineTrump);
+        g.append("path")
+            .datum(data)
+            .attr("fill", "none")
+            .attr("stroke", "#e67c52")
+            .attr("stroke-linejoin", "round")
+            .attr("stroke-linecap", "round")
+            .attr("stroke-width", 1.5)
+            .attr("d", lineEisenhower);
 
 
         // add labels
@@ -177,9 +189,14 @@
           .attr("text-anchor", "start")
           .style("fill", "#e4a928")
           .text("Trump");
+        g.append("text")
+          .attr("transform", "translate(" + (width) + "," + y(data[0].eisenhower) + ")")
+          .attr("dy", ".15em")
+          .attr("text-anchor", "start")
+          .style("fill", "#e67c52")
+          .text("Eisenhower");
 
       });
-
     </script>
   </body>
 </html>
