@@ -80,15 +80,16 @@
 
       var parseTime = d3.timeParse("%Y");
 
-      var x = d3.scaleTime()
-          .rangeRound([0, width]);
+      var x = d3.scaleTime().rangeRound([0, width]);
+      var y = d3.scaleLinear().rangeRound([height, 0]);
 
-      var y = d3.scaleLinear()
-          .rangeRound([height, 0]);
 
+      // create lines
       var line = d3.line()
           .x(function(d) { return x(d.date); })
           .y(function(d) { return y(d.close); });
+
+
 
       d3.tsv("data.tsv", function(d) {
         d.date = parseTime(d.date);
@@ -126,7 +127,7 @@
             .attr("d", line);
 
         g.append("text")
-          .attr("transform", "translate(" + (width-10) + "," + y(data[0].close) + ")")
+          .attr("transform", "translate(" + (width-20) + "," + y(data[0].close) + ")")
           .attr("dy", ".35em")
           .attr("text-anchor", "start")
           .style("fill", "steelblue")
