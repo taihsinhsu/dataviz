@@ -82,12 +82,7 @@
 
       var x = d3.scaleTime().rangeRound([0, width]);
       var y = d3.scaleLinear().rangeRound([height, 0]);
-          z = d3.scaleOrdinal(d3.schemeCategory10);
 
-      g = d3.select("z")
-             .append("g")
-             .attr("width", 400)
-             .attr("height", 50);
 
 
       var lineObama = d3.line()
@@ -132,7 +127,6 @@
             .text("Number of Guardian Articles");
 
 
-        
         // create lines
         g.append("path")
             .datum(data)
@@ -150,10 +144,6 @@
             .attr("stroke-linecap", "round")
             .attr("stroke-width", 1.5)
             .attr("d", lineClinton);
-
-        g.selectAll("path")
-            .data( d3.range(2) )
-            .enter()
 
 
         // add labels
