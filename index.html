@@ -85,7 +85,7 @@
 
 
       // create lines
-      var line = d3.line()
+      var lineObama = d3.line()
           .x(function(d) { return x(d.date); })
           .y(function(d) { return y(d.obama); });
 
@@ -125,7 +125,7 @@
             .attr("stroke-linejoin", "round")
             .attr("stroke-linecap", "round")
             .attr("stroke-width", 1.5)
-            .attr("d", line);
+            .attr("d", lineObama);
 
         // add labels
         g.append("text")
