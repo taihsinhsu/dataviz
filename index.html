@@ -121,6 +121,9 @@
       var lineKennedy = d3.line()
           .x(function(d) { return x(d.date); })
           .y(function(d) { return y(d.kennedy); });
+      var lineJohnson = d3.line()
+          .x(function(d) { return x(d.date); })
+          .y(function(d) { return y(d.johnson); });
 
 
       d3.tsv("data.tsv", function(d) {
@@ -136,15 +139,16 @@
         d.truman = +d.truman;
         d.hoover = +d.hoover; 
         d.carter = +d.carter; 
-        d.kennedy = +d.kennedy;       
+        d.kennedy = +d.kennedy;
+        d.johnson = +d.johnson;         
         return d;
         }, function(error, data) {
         if (error) throw error;
 
         x.domain(d3.extent(data, function(d) { return d.date; }));
         y.domain([
-          d3.min(data, function(d) { return Math.min(d.obama, d.clinton, d.trump, d.eisenhower, d.roosevelt, d.bush, d.wbush, d.ford, d.truman, d.hoover, d.carter, d.kennedy); }),
-          d3.max(data, function(d) { return Math.max(d.obama, d.clinton, d.trump, d.eisenhower, d.roosevelt, d.bush, d.wbush, d.ford, d.truman, d.hoover, d.carter, d.kennedy); })
+          d3.min(data, function(d) { return Math.min(d.obama, d.clinton, d.trump, d.eisenhower, d.roosevelt, d.bush, d.wbush, d.ford, d.truman, d.hoover, d.carter, d.kennedy, d.johnson); }),
+          d3.max(data, function(d) { return Math.max(d.obama, d.clinton, d.trump, d.eisenhower, d.roosevelt, d.bush, d.wbush, d.ford, d.truman, d.hoover, d.carter, d.kennedy, d.johnson); })
         ]);
 
 
@@ -238,7 +242,7 @@
             .attr("stroke-linejoin", "round")
             .attr("stroke-linecap", "round")
             .attr("stroke-width", 1.5)
-            .attr("d", lineTruma);
+            .attr("d", lineTruman);
         g.append("path")
             .datum(data)
             .attr("fill", "none")
@@ -263,6 +267,14 @@
             .attr("stroke-linecap", "round")
             .attr("stroke-width", 1.5)
             .attr("d", lineKennedy);
+        g.append("path")
+            .datum(data)
+            .attr("fill", "none")
+            .attr("stroke", "#44320c")
+            .attr("stroke-linejoin", "round")
+            .attr("stroke-linecap", "round")
+            .attr("stroke-width", 1.5)
+            .attr("d", lineJohnson);
 
 
         // add labels
@@ -319,25 +331,31 @@
           .attr("dy", ".15em")
           .attr("text-anchor", "start")
           .style("fill", "#a15639")
-          .text("Truma");
+          .text("Truman");
         g.append("text")
-          .attr("transform", "translate(" + (width) + "," + y(data[0].truman) + ")")
+          .attr("transform", "translate(" + (width) + "," + y(data[0].hoover) + ")")
           .attr("dy", ".15em")
           .attr("text-anchor", "start")
           .style("fill", "#724874")
           .text("Hoover");
         g.append("text")
-          .attr("transform", "translate(" + (width) + "," + y(data[0].truman) + ")")
+          .attr("transform", "translate(" + (width) + "," + y(data[0].carter) + ")")
           .attr("dy", ".15em")
           .attr("text-anchor", "start")
           .style("fill", "#283124")
           .text("Carter");
         g.append("text")
-          .attr("transform", "translate(" + (width) + "," + y(data[0].truman) + ")")
+          .attr("transform", "translate(" + (width) + "," + y(data[0].kennedy) + ")")
           .attr("dy", ".15em")
           .attr("text-anchor", "start")
           .style("fill", "#423c08")
           .text("Kennedy");
+        g.append("text")
+          .attr("transform", "translate(" + (width) + "," + y(data[0].johnson) + ")")
+          .attr("dy", ".15em")
+          .attr("text-anchor", "start")
+          .style("fill", "#44320c")
+          .text("Johnson");
       });
     </script>
   </body>
